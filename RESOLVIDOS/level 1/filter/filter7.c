@@ -30,6 +30,7 @@ void ft_filter(char *line , char *str)
 		{
 			write(1, &line[i], 1);
 			i++;
+			
 		}
 	}
 }
