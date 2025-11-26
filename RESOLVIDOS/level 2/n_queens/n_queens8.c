@@ -51,7 +51,7 @@ void solve(int *tab, int col, int n)
 		if(is_safe(tab, col, row))
 		{
 			tab[col] = row;
-			solve(tab, col +1, n);
+			solve(tab, col + 1, n);
 		}
 		row++;
 	}

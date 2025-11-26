@@ -8,7 +8,7 @@ void print_solution(int *buf, int b_index)
 	while(i < b_index)
 	{
 		fprintf(stdout, "%d", buf[i]);
-		if( i < b_index - 1)
+		if(i < b_index - 1)
 			fprintf(stdout, " ");
 		i++;
 	}
@@ -20,9 +20,7 @@ void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, in
 	if(s_index >= size)
 	{
 		if(sum == n)
-		{
 			print_solution(buf, b_index);
-		}
 		return;
 	}
 	buf[b_index] = set[s_index];
@@ -37,7 +35,7 @@ int main(int ac, char *av[])
 
 	if(ac < 3)
 		return 1;
-	n = atoi(av[1]);
+	n =  atoi(av[1]);
 	size = ac - 2;
 	buf = malloc(sizeof(int) * size);
 	set = malloc(sizeof(int) * size);

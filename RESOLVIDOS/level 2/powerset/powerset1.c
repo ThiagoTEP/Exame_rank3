@@ -8,7 +8,7 @@ void print_solution(int *buf, int b_index)
 	while(i < b_index)
 	{
 		fprintf(stdout, "%d", buf[i]);
-		if( i < b_index - 1)
+		if(i < b_index - 1)
 			fprintf(stdout, " ");
 		i++;
 	}
@@ -19,7 +19,7 @@ void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, in
 {
 	if(s_index >= size)
 	{
-		if(sum == n)
+		if(n == sum)
 		{
 			print_solution(buf, b_index);
 		}
@@ -52,7 +52,7 @@ int main(int ac, char *av[])
 	int i = 0;
 	while(i < size)
 	{
-		set[i] = atoi(av[i + 2]);
+		set[i]= atoi(av[i + 2]);
 		i++;
 	}
 	backtrack(n, 0, set, size, buf, 0, 0);

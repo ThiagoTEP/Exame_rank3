@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int ft_abs(int n)
 {
@@ -51,7 +52,7 @@ void solve(int *tab, int col, int n)
 		if(is_safe(tab, col, row))
 		{
 			tab[col] = row;
-			solve(tab, col +1, n);
+			solve(tab, col + 1, n);
 		}
 		row++;
 	}
@@ -67,7 +68,7 @@ int main(int ac, char *av[])
 	n = atoi(av[1]);
 	if(n <= 0)
 		return 1;
-	tab = malloc(sizeof(int) *  n);
+	tab = malloc(sizeof(int) * n);
 	if(!tab)
 		return 1;
 	solve(tab, 0, n);

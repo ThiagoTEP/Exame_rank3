@@ -5,7 +5,7 @@ int ft_abs(int n)
 {
 	if(n < 0)
 		return (-n);
-	return n;
+	return (n);
 }
 
 int is_safe(int *tab, int col, int row)
@@ -30,7 +30,7 @@ void print_solution(int *tab, int n)
 	while(i < n)
 	{
 		fprintf(stdout, "%d", tab[i]);
-		if(i < n - 1)
+		if(i < n -1)
 			fprintf(stdout, " ");
 		i++;
 	}

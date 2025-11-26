@@ -1,35 +1,35 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int ft_abs(int n)
 {
 	if(n < 0)
-		return(-n);
-	return n;
+		return (-n);
+	return (n);
 }
 
-int is_safe(int *board, int col, int row)
+int is_safe(int *tab, int col, int row)
 {
-	int prev = 0;
+	int col_ant = 0;
 
-	while(prev < col)
+	while(col_ant < col)
 	{
-		if(board[prev] == row)
+		if(tab[col_ant] == row)
 			return 0;
-		if(ft_abs(board[prev] - row) == col - prev)
+		if(ft_abs(tab[col_ant] - row) == col - col_ant)
 			return 0;
-		prev++;
+		col_ant++;
 	}
 	return 1;
 }
 
-void print_solution(int *board, int n)
+void print_solution(int *tab, int n)
 {
 	int i = 0;
 
 	while(i < n)
 	{
-		fprintf(stdout, "%d", board[i]);
+		fprintf(stdout, "%d", tab[i]);
 		if(i < n - 1)
 			fprintf(stdout, " ");
 		i++;
@@ -37,21 +37,21 @@ void print_solution(int *board, int n)
 	fprintf(stdout, "\n");
 }
 
-void solve(int *board, int col, int n)
+void solve(int *tab, int col, int n)
 {
 	int row = 0;
 
 	if(col == n)
 	{
-		print_solution(board, n);
+		print_solution(tab, n);
 		return;
 	}
 	while(row < n)
 	{
-		if(is_safe(board, col, row))
+		if(is_safe(tab, col, row))
 		{
-			board[col] = row;
-			solve(board, col + 1, n);
+			tab[col] = row;
+			solve(tab, col + 1, n);
 		}
 		row++;
 	}
@@ -60,17 +60,17 @@ void solve(int *board, int col, int n)
 int main(int ac, char *av[])
 {
 	int n;
-	int *board;
+	int *tab;
 
 	if(ac != 2)
 		return 1;
 	n = atoi(av[1]);
 	if(n <= 0)
 		return 1;
-	board = malloc(sizeof(int) * n);
-	if(!board)
+	tab = malloc(sizeof(int) * n);
+	if(!tab)
 		return 1;
-	solve(board, 0 ,n);
-	free(board);
+	solve(tab, 0, n);
+	free(tab);
 	return 0;
 }

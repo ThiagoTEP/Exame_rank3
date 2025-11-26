@@ -5,7 +5,7 @@ int ft_abs(int n)
 {
 	if(n < 0)
 		return (-n);
-	return n;
+	return (n);
 }
 
 int is_safe(int *tab, int col, int row)
@@ -51,7 +51,7 @@ void solve(int *tab, int col, int n)
 		if(is_safe(tab, col, row))
 		{
 			tab[col] = row;
-			solve(tab, col +1, n);
+			solve(tab, col + 1, n);
 		}
 		row++;
 	}
@@ -64,10 +64,10 @@ int main(int ac, char *av[])
 
 	if(ac != 2)
 		return 1;
-	n = atoi(av[1]);
+	n=atoi(av[1]);
 	if(n <= 0)
 		return 1;
-	tab = malloc(sizeof(int) *  n);
+	tab = malloc(sizeof(int) * n);
 	if(!tab)
 		return 1;
 	solve(tab, 0, n);
