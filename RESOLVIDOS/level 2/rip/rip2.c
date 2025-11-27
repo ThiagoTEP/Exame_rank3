@@ -1,17 +1,16 @@
-#include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-int is_valid(char *s)
+int is_valid(int *buf)
 {
-	int count  = 0;
+	int count = 0;
 	int i = 0;
 
-	while(s[i])
+	while(buf[i])
 	{
-		if(s[i] == '(')
+		if(buf[i] == '(')
 			count++;
-		else if(s[i] == ')')
+		else if(buf[i] == ')')
 		{
 			if(count == 0)
 				return 0;
@@ -19,39 +18,39 @@ int is_valid(char *s)
 		}
 		i++;
 	}
-	return (count == 0);
+	return(count == 0);
 }
 
-void backtrack(char *s, int index, int left, int rigth, int open, char *buf)
+void backtrack(char *s, int index, int left, int right, int open, char *buf)
 {
 	if(s[index] == '\0')
 	{
-		buf[index] = '\0';
+		buf[index] == '\0';
 		if(is_valid(buf))
 			puts(buf);
 		return;
 	}
-	else if( s[index] == '(')
+	else if(s[index] == '(')
 	{
 		if(left > 0)
 		{
 			buf[index] = ' ';
-			backtrack(s, index + 1, left  - 1, rigth, open, buf);
+			backtrack(s, index + 1, left - 1, right, open, buf);
 		}
 		buf[index] = '(';
-		backtrack(s, index + 1, left, rigth, open + 1, buf);
+		backtrack(s, index + 1, left, right, open + 1, buf);
 	}
 	else
 	{
-		if(rigth > 0)
+		if(right > 0)
 		{
 			buf[index] = ' ';
-			backtrack(s, index + 1, left, rigth - 1, open, buf);
+			backtrack(s, index + 1, left, right - 1, open, buf);
 		}
 		if(open > 0)
 		{
 			buf[index] = ')';
-			backtrack(s, index + 1, left, rigth, open - 1, buf);
+			backtrack(s, index + 1, left, right, open - 1, buf);
 		}
 	}
 }
@@ -59,7 +58,7 @@ void backtrack(char *s, int index, int left, int rigth, int open, char *buf)
 int main(int ac, char *av[])
 {
 	char *s, *buf;
-	int i = 0, left = 0, rigth = 0;
+	int i = 0, left = 0, right = 0;
 
 	if(ac != 2)
 		return 1;
@@ -73,14 +72,14 @@ int main(int ac, char *av[])
 			if(left > 0)
 				left--;
 			else
-				rigth++;
+				right--;
 		}
 		i++;
 	}
 	buf = malloc(i + 1);
 	if(!buf)
 		return 1;
-	backtrack(s, 0, left, rigth, 0, buf);
+	backtrack(s, 0, left, right, 0, buf);
 	free(buf);
 	return 0;
 }
