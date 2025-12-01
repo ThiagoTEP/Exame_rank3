@@ -60,26 +60,26 @@ int main(int ac, char *av[])
 	char *s, *buf;
 	int i = 0, left = 0, right = 0;
 
-	if(ac != 2)
-		return 1;
-	s = av[1];
-	while(s[i])
-	{
-		if(s[i] == '(')
-			left++;
-		else
+		if(ac != 2)
+			return 1;
+		s = av[1];
+		while(s[i])
 		{
-			if(left > 0)
-				left--;
+			if(s[i] == '(')
+				left++;
 			else
-				right++;
+			{
+				if(left > 0)
+					left--;
+				else
+					right++;
+			}
+			i++;
 		}
-		i++;
+		buf = malloc(i + 1);
+		if(!buf)
+			return 1;
+		backtrack(s, 0, left, right, 0, buf);
+		free(buf);
+		return 0;
 	}
-	buf = malloc(i + 1);
-	if(!buf)
-		return 1;
-	backtrack(s, 0, left, right, 0 , buf);
-	free(buf);
-	return 0;
-}

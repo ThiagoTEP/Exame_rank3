@@ -15,23 +15,25 @@ void print_solution(int *buf, int b_index)
 	fprintf(stdout, "\n");
 }
 
-void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, int sum)
+void backtrack(int n, int s_index, int  *set, int size, int *buf, int b_index, int sum)
 {
 	if(s_index >= size)
 	{
 		if(sum == n)
+		{
 			print_solution(buf, b_index);
+		}
 		return;
 	}
 	buf[b_index] = set[s_index];
-	backtrack(n, s_index + 1, set, size, buf, b_index + 1, sum + set[s_index]);
+	backtrack(n , s_index + 1, set, size, buf, b_index + 1, sum + set[s_index]);
 	backtrack(n, s_index + 1, set, size, buf, b_index, sum);
 }
 
 int main(int ac, char *av[])
 {
 	int n, size;
-	int *buf, *set;
+	int *set, *buf;
 
 	if(ac < 3)
 		return 1;

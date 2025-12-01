@@ -15,14 +15,12 @@ void print_solution(int *buf, int b_index)
 	fprintf(stdout, "\n");
 }
 
-void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, int sum)
+void backtrack(int n,int s_index, int *set, int size, int *buf, int b_index, int sum)
 {
 	if(s_index >= size)
 	{
-		if(n == sum)
-		{
+		if(sum == n)
 			print_solution(buf, b_index);
-		}
 		return;
 	}
 	buf[b_index] = set[s_index];
@@ -33,14 +31,14 @@ void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, in
 int main(int ac, char *av[])
 {
 	int n, size;
-	int *buf, *set;
+	int *set, *buf;
 
 	if(ac < 3)
 		return 1;
-	n = atoi(av[1]);
+	n =  atoi(av[1]);
 	size = ac - 2;
-	buf = malloc(sizeof(int) * size);
-	set = malloc(sizeof(int) * size);
+	buf = calloc(size, sizeof(int));
+	set = calloc(size, sizeof(int));
 	if(!buf || !set)
 	{
 		if(buf)
@@ -52,7 +50,7 @@ int main(int ac, char *av[])
 	int i = 0;
 	while(i < size)
 	{
-		set[i]= atoi(av[i + 2]);
+		set[i] = atoi(av[i + 2]);
 		i++;
 	}
 	backtrack(n, 0, set, size, buf, 0, 0);

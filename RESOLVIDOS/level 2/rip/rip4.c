@@ -4,7 +4,7 @@
 int is_valid(char *buf)
 {
 	int count = 0;
-	int i = 0;
+	int i  = 0;
 
 	while(buf[i])
 	{
@@ -35,7 +35,7 @@ void backtrack(char *s, int index, int left, int right, int open, char *buf)
 		if(left > 0)
 		{
 			buf[index] = ' ';
-			backtrack(s, index + 1, left - 1, right, open, buf);
+			backtrack(s, index+ 1, left - 1, right, open, buf);
 		}
 		buf[index] = '(';
 		backtrack(s, index + 1, left, right, open + 1, buf);
@@ -79,7 +79,7 @@ int main(int ac, char *av[])
 	buf = malloc(i + 1);
 	if(!buf)
 		return 1;
-	backtrack(s, 0, left, right, 0 , buf);
+	backtrack(s, 0 , left, right, 0, buf);
 	free(buf);
 	return 0;
 }

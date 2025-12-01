@@ -6,7 +6,7 @@
 
 typedef struct
 {
-	float x , y;
+	float x, y;
 } City;
 
 City cities[MAX];
@@ -14,19 +14,19 @@ City cities[MAX];
 int n;
 float dist[MAX][MAX];
 int used[MAX];
-int path[MAX];
+int route[MAX];
 float best = 1e9;
 
 float distance(City a, City b)
 {
-	return(sqrtf((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)));
+	return(sqrtf((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y)));
 }
 
 void search(int k, float length)
 {
 	if(k == n)
 	{
-		length += dist[path[n - 1]][path[0]];
+		length += dist[route[n - 1]][route[0]];
 		if(length < best)
 			best = length;
 		return;
@@ -37,11 +37,11 @@ void search(int k, float length)
 		if(!used[i])
 		{
 			used[i] = 1;
-			path[k] = i;
-			float new_lenght = length;
+			route[k] = i;
+			float new_length = length;
 			if(k > 0)
-				new_lenght += dist[path[k - 1]][i];
-			search(k + 1, new_lenght);
+				new_length += dist[route[k -1]][i];
+			search(k + 1, new_length);
 			used[i] = 0;
 		}
 		i++;

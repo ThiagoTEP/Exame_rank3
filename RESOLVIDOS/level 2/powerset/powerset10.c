@@ -25,20 +25,20 @@ void backtrack(int n, int s_index, int *set, int size, int *buf, int b_index, in
 	}
 	buf[b_index] = set[s_index];
 	backtrack(n, s_index + 1, set, size, buf, b_index + 1, sum + set[s_index]);
-	backtrack(n , s_index + 1, set, size, buf, b_index, sum);
+	backtrack(n, s_index + 1, set , size, buf, b_index, sum);
 }
 
 int main(int ac, char *av[])
 {
-	int *set, *buf;
 	int n, size;
+	int *set, *buf;
 
 	if(ac < 3)
 		return 1;
 	n = atoi(av[1]);
 	size = ac - 2;
-	buf = malloc(sizeof(int) * size);
-	set = malloc(sizeof(int) * size);
+	buf = calloc(size, sizeof(int));
+	set = calloc(size, sizeof(int));
 	if(!buf || !set)
 	{
 		if(buf)
@@ -48,12 +48,12 @@ int main(int ac, char *av[])
 		return 1;
 	}
 	int i = 0;
-	while (i < size)
+	while(i < size)
 	{
 		set[i] = atoi(av[i + 2]);
 		i++;
 	}
-	backtrack(n, 0, set, size, buf, 0, 0);
+	backtrack(n , 0, set, size, buf, 0, 0);
 	free(buf);
 	free(set);
 	return 0;

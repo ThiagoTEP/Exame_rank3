@@ -8,7 +8,7 @@ void print_solution(int *buf, int b_index)
 	while(i < b_index)
 	{
 		fprintf(stdout, "%d", buf[i]);
-		if(i < b_index - 1);
+		if(i < b_index - 1)
 			fprintf(stdout, " ");
 		i++;
 	}
@@ -37,9 +37,9 @@ int main(int ac, char *av[])
 		return 1;
 	n = atoi(av[1]);
 	size = ac - 2;
-	buf = malloc(sizeof(int) * size);
-	set = malloc(sizeof(int) * size);
-	if(!buf || !set)
+	buf = calloc(size, sizeof(int));
+	set = calloc(size, sizeof(int));
+	if(!buf || ! set)
 	{
 		if(buf)
 			free(buf);

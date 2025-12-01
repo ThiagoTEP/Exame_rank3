@@ -4,9 +4,8 @@
 
 # define MAX 11
 
-typedef struct
-{
-	float x , y;
+typedef struct{
+	float x, y;
 } City;
 
 City cities[MAX];
@@ -14,21 +13,21 @@ City cities[MAX];
 int n;
 float dist[MAX][MAX];
 int used[MAX];
-int path[MAX];
+int route[MAX];
 float best = 1e9;
 
 float distance(City a, City b)
 {
-	return(sqrtf((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)));
+	return(sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y)));
 }
 
-void search(int k, float length)
+void search(int k, int lenght)
 {
 	if(k == n)
 	{
-		length += dist[path[n - 1]][path[0]];
-		if(length < best)
-			best = length;
+		lenght += dist[route[n - 1]][route[0]];
+		if(lenght < best)
+			best = lenght;
 		return;
 	}
 	int i = 0;
@@ -37,10 +36,10 @@ void search(int k, float length)
 		if(!used[i])
 		{
 			used[i] = 1;
-			path[k] = i;
-			float new_lenght = length;
+			route[k] = i;
+			float new_lenght = lenght;
 			if(k > 0)
-				new_lenght += dist[path[k - 1]][i];
+				new_lenght += dist[route[k - 1]][i];
 			search(k + 1, new_lenght);
 			used[i] = 0;
 		}
@@ -52,7 +51,7 @@ int main(void)
 {
 	n = 0;
 
-	while(fscanf(stdin, " %f, %f", &cities[n].x, &cities[n].y) == 2)
+	while(fscanf(stdin, " %f, %f", &cities[n].x, &cities[n].y))
 		n++;
 
 	int i = 0;

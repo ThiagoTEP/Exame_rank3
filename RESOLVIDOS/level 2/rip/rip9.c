@@ -10,7 +10,7 @@ int is_valid(char *buf)
 	{
 		if(buf[i] == '(')
 			count++;
-		else if(buf[i] == ')')
+		else if (buf[i] == ')')
 		{
 			if(count == 0)
 				return 0;
@@ -79,7 +79,7 @@ int main(int ac, char *av[])
 	buf = malloc(i + 1);
 	if(!buf)
 		return 1;
-	backtrack(s, 0, left, right, 0 , buf);
+	backtrack(s, 0 , left, right, 0 , buf);
 	free(buf);
 	return 0;
 }

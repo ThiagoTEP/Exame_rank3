@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <math.h>
 
+#ifndef MAX
 # define MAX 11
+#endif
 
-typedef struct
-{
-	float x , y;
+typedef struct {
+	float x, y;
 } City;
 
 City cities[MAX];
@@ -19,7 +20,7 @@ float best = 1e9;
 
 float distance(City a, City b)
 {
-	return(sqrtf((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)));
+	return sqrtf((a.x -b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
 }
 
 void search(int k, float length)
@@ -38,10 +39,10 @@ void search(int k, float length)
 		{
 			used[i] = 1;
 			path[k] = i;
-			float new_lenght = length;
+			float new_length = length;
 			if(k > 0)
-				new_lenght += dist[path[k - 1]][i];
-			search(k + 1, new_lenght);
+				new_length += dist[path[k - 1]][i];
+			search(k + 1, new_length);
 			used[i] = 0;
 		}
 		i++;
@@ -52,7 +53,7 @@ int main(void)
 {
 	n = 0;
 
-	while(fscanf(stdin, " %f, %f", &cities[n].x, &cities[n].y) == 2)
+	while(fscanf(stdin, " %f , %f", &cities[n].x, &cities[n].y) == 2)
 		n++;
 
 	int i = 0;
