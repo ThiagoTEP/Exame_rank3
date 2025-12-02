@@ -5,19 +5,22 @@ size_t ft_strlen(char *s)
 {
 	size_t i = 0;
 
+	if(!s)
+		return 0;
 	while(s[i])
 		i++;
 	return i;
 }
+
 void backtrack(char *s, size_t s_len, char *buf, size_t b_len, int *used)
 {
-	size_t i = 0;
 	if(s_len == b_len)
 	{
 		buf[b_len] = '\0';
 		puts(buf);
 		return;
 	}
+	size_t i = 0;
 	while(i < s_len)
 	{
 		if(!used[i])
@@ -31,10 +34,9 @@ void backtrack(char *s, size_t s_len, char *buf, size_t b_len, int *used)
 	}
 }
 
-
 int main(int ac, char *av[])
 {
-	char *buf, *s;
+	char *s, *buf;
 	size_t s_len;
 	int *used;
 	char tmp;
@@ -72,6 +74,5 @@ int main(int ac, char *av[])
 	backtrack(s, s_len, buf, 0, used);
 	free(buf);
 	free(used);
-
 	return 0;
 }

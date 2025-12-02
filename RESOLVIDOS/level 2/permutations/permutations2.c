@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-size_t ft_strlen(char *str)
+size_t ft_strlen(char *s)
 {
 	size_t i = 0;
 
-	if(!str)
+	if(!s)
 		return 0;
-	while(str[i])
+	while(s[i])
 		i++;
 	return i;
 }
@@ -76,5 +76,4 @@ int main(int ac, char *av[])
 	free(buf);
 	free(used);
 	return 0;
-
 }

@@ -4,7 +4,10 @@
 size_t ft_strlen(char *s)
 {
 	size_t i = 0;
-	while (s[i])
+
+	if(!s)
+		return 0;
+	while(s[i])
 		i++;
 	return i;
 }
@@ -16,7 +19,7 @@ void backtrack(char *s, size_t s_len, char *buf, size_t b_len, int *used)
 	if(s_len == b_len)
 	{
 		buf[b_len] = '\0';
-			puts(buf);
+		puts(buf);
 		return;
 	}
 	while(i < s_len)
@@ -43,7 +46,7 @@ int main(int ac, char *av[])
 		return 1;
 	s = av[1];
 	s_len = ft_strlen(s);
-	buf = malloc(sizeof(char) * s_len + 1);
+	buf =  malloc(sizeof(char) * s_len + 1);
 	used = calloc(s_len, sizeof(int));
 	if(!buf || !used)
 	{
