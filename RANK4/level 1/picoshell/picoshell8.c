@@ -1,46 +1,53 @@
 #include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int    picoshell(char **cmds[])
+int picoshell(char **cmds[])
 {
 	int num = 0;
 	while(cmds[num])
 		num++;
+	if(num == 0)
+		return 0;
 
-	pid_t	pid[num];
 	int fd[2];
+	pid_t pid[num];
 	int prev_fd = -1;
 
-	for (int i = 0; i < num; i++)
+	int i = 0;
+	while(i < num)
 	{
-		if ((i < num -1) && (pipe(fd) == -1))
+		if((i < num -1) && (pipe(fd) == -1))
 			return 1;
-		if ((pid[i] = fork()) < 0)
+		if((pid[i] = fork()) < 0)
 			return 1;
-		if (pid[i] == 0)
+		if(pid[i] == 0)
 		{
-			if (prev_fd != -1)
+			if(prev_fd != -1)
 				dup2(prev_fd, 0), close(prev_fd);
-			if(i < num -1)
+			if(i < num  -1)
 				dup2(fd[1], 1), close(fd[0]), close(fd[1]);
 			execvp(cmds[i][0], cmds[i]);
 			exit(1);
 		}
-		if (prev_fd != -1)
+		if(prev_fd != -1)
 			close(prev_fd);
-		if (i < num -1)
+		if(i < num -1)
 			close(fd[1]), prev_fd = fd[0];
+		i++;
 	}
-	for (int i = 0; i < num; i++)
+	i = 0;
+	while(i < num)
+	{
 		wait(NULL);
-	return (0);
+		i++;
+	}
+	return 0;
 }
 
-// GIVEN MAIN V
 int main(int argc, char **argv)
 {
 	int cmds_size = 1;
